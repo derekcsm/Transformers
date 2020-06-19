@@ -48,11 +48,13 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
         viewModel.connectViewInterface(this)
         setContentView(R.layout.activity_create_transformer)
 
-        transformerId = intent!!.extras!!.getString(EXTRA_TRANSFORMER_ID).toString()
-        if (transformerId != "") {
-            var transformerToEdit = viewModel.getTransformerFromDB(transformerId)
-            et_name.setText(transformerToEdit.name)
+        if (intent.extras != null && intent.extras!!.containsKey(EXTRA_TRANSFORMER_ID)) {
+            transformerId = intent!!.extras!!.get(EXTRA_TRANSFORMER_ID).toString()
+        }
 
+        if (transformerId != "") {
+            val transformerToEdit = viewModel.getTransformerFromDB(transformerId)
+            et_name.setText(transformerToEdit.name)
             sb_strength.setProgress(transformerToEdit.strength - 1)
             sb_intelligence.setProgress(transformerToEdit.intelligence - 1)
             sb_speed.setProgress(transformerToEdit.speed - 1)
