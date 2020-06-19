@@ -50,10 +50,6 @@ class TransListActivity : AppCompatActivity(),
     fun reload() {
         viewModel.fetchTransformers()
     }
-    /*
-    TODO
-    Fetch transformers from DB first
-     */
 
     override fun populateList(transformersList: List<Transformer>) {
         transListAdapter.setItems(transformersList)
@@ -64,6 +60,7 @@ class TransListActivity : AppCompatActivity(),
     }
 
     override fun onDeleteTransformerClicked(transformer: Transformer) {
-        TODO("Not yet implemented")
+        transListAdapter.removeTransformer(transformer.id)
+        viewModel.deleteTransformer(transformer.id)
     }
 }

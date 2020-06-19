@@ -9,7 +9,7 @@ import xyz.derekcsm.transformers.model.Transformer
 class TransListAdapter(val listener: TransListAdapterListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var adapterItems = listOf<Transformer>()
+    private var adapterItems = mutableListOf<Transformer>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return TransformerViewHolder(
@@ -25,8 +25,19 @@ class TransListAdapter(val listener: TransListAdapterListener) :
     }
 
     fun setItems(adapterItems: List<Transformer>) {
-        this.adapterItems = adapterItems
+        this.adapterItems.clear()
+        this.adapterItems.addAll(adapterItems)
         notifyDataSetChanged()
+    }
+
+    fun removeTransformer(id: String) {
+        adapterItems.forEachIndexed { index, value ->
+            if (value.id.equals(id)) {
+                adapterItems.removeAt(index)
+                notifyItemRemoved(index)
+                return
+            }
+        }
     }
 }
 

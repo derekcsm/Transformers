@@ -22,7 +22,9 @@ class TransListViewModel @ViewModelInject constructor(
     }
 
     fun deleteTransformer(id: String) {
-        // todo
+        uiScope.launch {
+            transformersRepository.deleteTransformer(id)
+        }
     }
 
     fun fetchTransformers() {

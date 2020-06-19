@@ -1,9 +1,6 @@
 package xyz.derekcsm.transformers.persistence
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import xyz.derekcsm.transformers.model.Transformer
 
 @Dao
@@ -20,4 +17,7 @@ interface TransformersDao {
 
     @Query("SELECT * FROM Transformer WHERE id =:id")
     fun getTransformer(id: String): Transformer
+
+    @Query("DELETE FROM Transformer WHERE id =:id")
+    fun deleteTransformer(id: String)
 }

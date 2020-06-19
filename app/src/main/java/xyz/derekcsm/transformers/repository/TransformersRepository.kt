@@ -46,6 +46,29 @@ class TransformersRepository @Inject constructor(
             }
         }
     }
+
+    suspend fun deleteTransformer(id: String): Boolean {
+        transformersDao.deleteTransformer(id)
+
+        when (val deleteResponse = apiService.deleteTransformer(id).await()) {
+            is NetworkResponse.Success -> {
+                isLoading.set(false)
+                return true
+            }
+            is NetworkResponse.ServerError -> {
+                isLoading.set(false)
+                return false
+            }
+            is NetworkResponse.NetworkError -> {
+                isLoading.set(false)
+                return false
+            }
+            else -> {
+                isLoading.set(false)
+                error("unknown")
+            }
+        }
+    }
 }
 
 data class TransformersListRepositoryResponse(
