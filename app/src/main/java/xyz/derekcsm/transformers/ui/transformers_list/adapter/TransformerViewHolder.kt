@@ -12,8 +12,11 @@ class TransformerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     val context = itemView.context
 
     fun bindView(listener: TransListAdapterListener, transformer: Transformer) {
-        itemView.setOnClickListener {
+        itemView.card_transformer.setOnClickListener {
             listener.onTransformerClicked(transformer)
+        }
+        itemView.tv_delete.setOnClickListener {
+            listener.onDeleteTransformerClicked(transformer)
         }
 
         itemView.tv_name.text = transformer.name

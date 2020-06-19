@@ -62,4 +62,8 @@ class TransListActivity : AppCompatActivity(),
     override fun onTransformerClicked(transformer: Transformer) {
         startActivity(CreateTransformerActivity.activityIntent(this, transformer.id))
     }
+
+    override fun onDeleteTransformerClicked(transformer: Transformer) {
+        TODO("Not yet implemented")
+    }
 }

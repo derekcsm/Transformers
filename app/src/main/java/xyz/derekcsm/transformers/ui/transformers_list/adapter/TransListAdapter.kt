@@ -32,4 +32,5 @@ class TransListAdapter(val listener: TransListAdapterListener) :
 
 interface TransListAdapterListener {
     fun onTransformerClicked(transformer: Transformer)
+    fun onDeleteTransformerClicked(transformer: Transformer)
 }

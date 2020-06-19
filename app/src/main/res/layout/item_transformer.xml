@@ -2,12 +2,14 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_transformer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/first_keyline"
     android:layout_marginTop="@dimen/first_keyline_half"
     android:layout_marginRight="@dimen/first_keyline"
     android:layout_marginBottom="@dimen/first_keyline_half"
+    android:foreground="@drawable/selector_white"
     android:orientation="horizontal"
     android:padding="@dimen/first_keyline"
     app:cardCornerRadius="@dimen/card_corner_radius">
@@ -38,8 +40,17 @@
                 android:paddingBottom="@dimen/first_keyline_half"
                 tools:text="Transformer" />
 
-            <include
-                layout="@layout/layout_item_stats"/>
+            <include layout="@layout/layout_item_stats" />
+
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:background="@drawable/selector_white"
+                android:gravity="center"
+                android:text="@string/delete"
+                android:textAllCaps="true"
+                android:textColor="@color/red" />
 
         </LinearLayout>
     </LinearLayout>

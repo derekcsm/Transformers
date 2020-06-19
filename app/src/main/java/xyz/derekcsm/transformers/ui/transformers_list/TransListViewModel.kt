@@ -21,7 +21,15 @@ class TransListViewModel @ViewModelInject constructor(
         Log.d(TAG, "initialized!")
     }
 
+    fun deleteTransformer(id: String) {
+        // todo
+    }
+
     fun fetchTransformers() {
+        //populate from DB first every time
+        val localTransformers = transformersRepository.fetchTransformersFromDB()
+        view!!.populateList(localTransformers)
+
         uiScope.launch {
             val response = transformersRepository.fetchTransformersFromNetwork()
             if (response.transformersList != null) {
