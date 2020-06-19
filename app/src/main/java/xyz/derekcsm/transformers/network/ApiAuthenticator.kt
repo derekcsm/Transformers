@@ -50,7 +50,6 @@ class ApiAuthenticator(val context: Context, val sharedPref: SharedPref) : Authe
         staleRequest: Request,
         retryCount: Int
     ): Request? {
-
         val authToken = renewToken().body()
         sharedPref.write(Constants.SHARED_PREF_TOKEN, authToken.toString())
         return rewriteRequest(staleRequest, retryCount, authToken.toString())

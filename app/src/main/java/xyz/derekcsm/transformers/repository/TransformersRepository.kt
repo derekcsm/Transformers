@@ -1,11 +1,7 @@
 package xyz.derekcsm.transformers.repository
 
-import android.util.Log
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.MutableLiveData
 import com.haroldadmin.cnradapter.NetworkResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import xyz.derekcsm.transformers.model.Transformer
 import xyz.derekcsm.transformers.network.ApiService
 import xyz.derekcsm.transformers.persistence.TransformersDao
@@ -19,56 +15,37 @@ class TransformersRepository @Inject constructor(
     private val TAG = "TransformersRepository"
     override var isLoading: ObservableBoolean = ObservableBoolean(false)
 
-    suspend fun fetchTransformers(error: (String) -> Unit) = withContext(Dispatchers.IO) {
-        Log.d(TAG, "fetchTransformers() called")
-        val liveData = MutableLiveData<List<Transformer>>()
-        isLoading.set(true)
-        var transformersList = transformersDao.getTransformersList()
+    fun fetchTransformersFromDB(): List<Transformer> {
+        return transformersDao.getTransformersList()
+    }
+
+    suspend fun fetchTransformersFromNetwork(): TransformersRepositoryResponse {
+        val transformersList: List<Transformer>
 
         when (val transformersResponse = apiService.getTransformers().await()) {
             is NetworkResponse.Success -> {
                 isLoading.set(false)
                 transformersList = transformersResponse.body.transformers
-                liveData.postValue(transformersList)
                 transformersDao.insertTransformersList(transformersList)
+                return TransformersRepositoryResponse(transformersList, null)
             }
             is NetworkResponse.ServerError -> {
                 isLoading.set(false)
-                error(transformersResponse.code)
+                return TransformersRepositoryResponse(null, transformersResponse.body!!.message())
             }
             is NetworkResponse.NetworkError -> {
                 isLoading.set(false)
-                error(transformersResponse.error)
+                return TransformersRepositoryResponse(null, transformersResponse.toString())
             }
             else -> {
                 isLoading.set(false)
                 error("unknown")
             }
         }
-
-        liveData.apply { postValue(transformersList) }
-    }
-
-    suspend fun loadTransformers() {
-        when (val transformersResponse = apiService.getTransformers().await()) {
-            is NetworkResponse.Success -> {
-                isLoading.set(false)
-//                transformersList = transformersResponse.body.transformers
-//                liveData.postValue(transformersList)
-//                transformersDao.insertTransformersList(transformersList)
-            }
-            is NetworkResponse.ServerError -> {
-                isLoading.set(false)
-//                error(transformersResponse.code)
-            }
-            is NetworkResponse.NetworkError -> {
-                isLoading.set(false)
-//                error(transformersResponse.error)
-            }
-            else -> {
-                isLoading.set(false)
-//                error("unknown")
-            }
-        }
     }
 }
+
+data class TransformersRepositoryResponse(
+    var transformersList: List<Transformer>?,
+    var errorMessage: String?
+)
