@@ -4,7 +4,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbar_height"
-    android:background="@color/colorPrimary">
+    android:background="@color/primary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
 
         <Button
             android:id="@+id/btn_toolbar"
-            style="@style/ButtonRoundedAccent"
+            style="@style/ButtonRoundedWhite"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
             android:layout_marginRight="@dimen/first_keyline"

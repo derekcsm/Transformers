@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar_button"
-        />
+    <include layout="@layout/toolbar_button" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,21 +16,66 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/et_name"
+            <LinearLayout
+                android:id="@+id/ll_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/first_keyline"
-                android:inputType="textPersonName" />
+                android:layout_marginBottom="@dimen/first_keyline"
+                android:background="@color/decepticon">
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/team_picker_height"
+                    android:layout_margin="@dimen/first_keyline"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:hint="@string/name"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/display_1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/team_picker_height"
+                android:paddingLeft="@dimen/first_keyline"
+                android:paddingRight="@dimen/first_keyline">
+
+                <TextView
+                    android:id="@+id/tv_team_autobots"
+                    style="@style/textTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/team_picker_height"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/autobot" />
+
+                <View
+                    android:layout_width="@dimen/first_keyline"
+                    android:layout_height="0dp" />
+
+                <TextView
+                    android:id="@+id/tv_team_decepticons"
+                    style="@style/textTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/team_picker_height"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/decepticon" />
+
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/first_keyline">
+                android:layout_margin="@dimen/first_keyline"
+                app:cardCornerRadius="@dimen/card_corner_radius">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity=""
                     android:orientation="vertical"
                     android:padding="@dimen/first_keyline">
 
@@ -44,8 +88,8 @@
                     <SeekBar
                         android:id="@+id/sb_strength"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:max="10" />
+                        android:layout_height="@dimen/seekbar_height"
+                        android:max="9" />
 
                     <TextView
                         style="@style/textBody"
@@ -56,8 +100,8 @@
                     <SeekBar
                         android:id="@+id/sb_intelligence"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:max="10" />
+                        android:layout_height="@dimen/seekbar_height"
+                        android:max="9" />
 
                     <TextView
                         style="@style/textBody"
@@ -68,8 +112,8 @@
                     <SeekBar
                         android:id="@+id/sb_speed"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:max="10" />
+                        android:layout_height="@dimen/seekbar_height"
+                        android:max="9" />
 
                     <TextView
                         style="@style/textBody"
@@ -80,8 +124,8 @@
                     <SeekBar
                         android:id="@+id/sb_endurance"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:max="10" />
+                        android:layout_height="@dimen/seekbar_height"
+                        android:max="9" />
 
                     <TextView
                         style="@style/textBody"
@@ -92,8 +136,8 @@
                     <SeekBar
                         android:id="@+id/sb_rank"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:max="10" />
+                        android:layout_height="@dimen/seekbar_height"
+                        android:max="9" />
 
                     <TextView
                         style="@style/textBody"
@@ -104,8 +148,8 @@
                     <SeekBar
                         android:id="@+id/sb_courage"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:max="10" />
+                        android:layout_height="@dimen/seekbar_height"
+                        android:max="9" />
 
                     <TextView
                         style="@style/textBody"
@@ -116,8 +160,8 @@
                     <SeekBar
                         android:id="@+id/sb_firepower"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:max="10" />
+                        android:layout_height="@dimen/seekbar_height"
+                        android:max="9" />
 
                     <TextView
                         style="@style/textBody"
@@ -128,8 +172,8 @@
                     <SeekBar
                         android:id="@+id/sb_skill"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:max="10" />
+                        android:layout_height="@dimen/seekbar_height"
+                        android:max="9" />
 
                 </LinearLayout>
 

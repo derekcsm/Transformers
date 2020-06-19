@@ -25,6 +25,10 @@
     <dimen name="button_rounded_radius">24dp</dimen>
 
     <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="seekbar_height">52dp</dimen>
 
+    <dimen name="card_corner_radius">20dp</dimen>
+
+    <dimen name="team_picker_height">60dp</dimen>
 
 </resources>

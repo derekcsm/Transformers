@@ -26,6 +26,9 @@ class CreateTransformerViewModel @ViewModelInject constructor(
         uiScope.launch {
             val transformerResponse = createEditRepository.createTransformer(transformer)
             Log.d(TAG, "postCreateTransformer() called" + transformerResponse)
+            if (transformerResponse.transformer != null) {
+                view!!.onRequestCompleted()
+            }
         }
     }
 
