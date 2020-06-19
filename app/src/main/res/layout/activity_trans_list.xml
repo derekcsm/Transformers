@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.transformers_list.TransListActivity">
 
-    <include
-        layout="@layout/toolbar_button"
-        />
+    <include layout="@layout/toolbar_button" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/toolbar"
         android:id="@+id/rv_transformers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
         android:clipToPadding="false"
         android:paddingTop="@dimen/first_keyline_half"
-        android:paddingBottom="@dimen/first_keyline" />
+        android:paddingBottom="@dimen/second_keyline" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -26,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        app:backgroundTint="@color/accent_colored"
         android:layout_margin="@dimen/first_keyline"
-        android:src="@drawable/ic_add_24dp" />
+        android:src="@drawable/ic_add_24dp"
+        app:backgroundTint="@color/accent_colored" />
 
 </RelativeLayout>

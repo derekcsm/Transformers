@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/first_keyline"
+    android:layout_marginTop="@dimen/first_keyline_half"
+    android:layout_marginRight="@dimen/first_keyline"
+    android:layout_marginBottom="@dimen/first_keyline_half"
+    android:orientation="horizontal"
+    android:padding="@dimen/first_keyline"
+    app:cardCornerRadius="@dimen/card_corner_radius">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/first_keyline">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdv_team_icon"
+            android:layout_width="@dimen/team_icon_size"
+            android:layout_height="@dimen/team_icon_size"
+            tools:background="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/first_keyline">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/textTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/first_keyline_half"
+                tools:text="Transformer" />
+
+            <include
+                layout="@layout/layout_item_stats"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

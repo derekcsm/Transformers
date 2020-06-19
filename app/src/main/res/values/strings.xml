@@ -15,6 +15,9 @@
   <string name="firepower">Firepower</string>
   <string name="skill">Skill</string>
 
+  <string name="stat">%1$s: %2$s</string>
   <string name="fight">Fight!</string>
   <string name="create">Create</string>
+
+
 </resources>
