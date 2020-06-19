@@ -38,6 +38,7 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
     }
 
     private val TAG = "CreateTransformerActivity"
+    private var transformerId: String = ""
 
     @VisibleForTesting
     val viewModel by viewModels<CreateTransformerViewModel>()
@@ -46,6 +47,21 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
         super.onCreate(savedInstanceState)
         viewModel.connectViewInterface(this)
         setContentView(R.layout.activity_create_transformer)
+
+        transformerId = intent!!.extras!!.getString(EXTRA_TRANSFORMER_ID).toString()
+        if (transformerId != "") {
+            var transformerToEdit = viewModel.getTransformerFromDB(transformerId)
+            et_name.setText(transformerToEdit.name)
+
+            sb_strength.setProgress(transformerToEdit.strength - 1)
+            sb_intelligence.setProgress(transformerToEdit.intelligence - 1)
+            sb_speed.setProgress(transformerToEdit.speed - 1)
+            sb_endurance.setProgress(transformerToEdit.endurance - 1)
+            sb_rank.setProgress(transformerToEdit.rank - 1)
+            sb_courage.setProgress(transformerToEdit.courage - 1)
+            sb_firepower.setProgress(transformerToEdit.firepower - 1)
+            sb_skill.setProgress(transformerToEdit.skill - 1)
+        }
 
         toolbar.elevation = 0f
         btn_toolbar.text = getString(R.string.create)
@@ -138,7 +154,7 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
         }
 
         val transformer = Transformer(
-            "",
+            transformerId,
             et_name.text.toString(),
             selectedTeam,
             sb_strength.progress + 1,
@@ -152,7 +168,11 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
             null
         )
 
-        viewModel.postCreateTransformer(transformer)
+        if (transformerId != "") {
+            // todo edit
+        } else {
+            viewModel.postCreateTransformer(transformer)
+        }
     }
 
     override fun onRequestCompleted() {

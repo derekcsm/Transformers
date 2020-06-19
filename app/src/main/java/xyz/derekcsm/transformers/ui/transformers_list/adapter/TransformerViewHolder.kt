@@ -12,6 +12,10 @@ class TransformerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     val context = itemView.context
 
     fun bindView(listener: TransListAdapterListener, transformer: Transformer) {
+        itemView.setOnClickListener {
+            listener.onTransformerClicked(transformer)
+        }
+
         itemView.tv_name.text = transformer.name
         itemView.sdv_team_icon.setImageURI(transformer.teamIcon)
 

@@ -15,6 +15,10 @@ class CreateEditTransformerRepository @Inject constructor(
     private val TAG = "CreateEditRepository"
     override var isLoading: ObservableBoolean = ObservableBoolean(false)
 
+    fun getTransformerFromDB(id: String): Transformer{
+        return transformersDao.getTransformer(id)
+    }
+
     suspend fun createTransformer(transformer: Transformer): CreateTransformerRepositoryResponse {
         when (val createTransformerResponse = apiService.createTransformer(transformer).await()) {
             is NetworkResponse.Success -> {

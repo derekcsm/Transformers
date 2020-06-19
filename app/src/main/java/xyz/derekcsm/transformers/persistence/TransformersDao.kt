@@ -17,4 +17,7 @@ interface TransformersDao {
 
     @Query("SELECT * FROM Transformer")
     fun getTransformersList(): List<Transformer>
+
+    @Query("SELECT * FROM Transformer WHERE id =:id")
+    fun getTransformer(id: String): Transformer
 }

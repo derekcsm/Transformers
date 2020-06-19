@@ -22,6 +22,10 @@ class CreateTransformerViewModel @ViewModelInject constructor(
         Log.d(TAG, "initialized!")
     }
 
+    fun getTransformerFromDB(transformerId: String) : Transformer {
+        return createEditRepository.getTransformerFromDB(transformerId)
+    }
+
     fun postCreateTransformer(transformer: Transformer) {
         uiScope.launch {
             val transformerResponse = createEditRepository.createTransformer(transformer)
