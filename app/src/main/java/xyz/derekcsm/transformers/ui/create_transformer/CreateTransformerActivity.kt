@@ -54,6 +54,7 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
 
         if (transformerId != "") {
             val transformerToEdit = viewModel.getTransformerFromDB(transformerId)
+            selectTeam(transformerToEdit.team)
             et_name.setText(transformerToEdit.name)
             sb_strength.setProgress(transformerToEdit.strength - 1)
             sb_intelligence.setProgress(transformerToEdit.intelligence - 1)
@@ -77,8 +78,10 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
     private var selectedTeam: String = Constants.TEAM_AUTOBOTS
     private fun setupTeamListener() {
 
-        // todo setup default
-        selectTeam(Constants.TEAM_AUTOBOTS)
+        // default for creation
+        if (transformerId == "") {
+            selectTeam(Constants.TEAM_AUTOBOTS)
+        }
 
         tv_team_autobots.setOnClickListener {
             selectTeam(Constants.TEAM_AUTOBOTS)
