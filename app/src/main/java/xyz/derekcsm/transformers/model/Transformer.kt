@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 @Entity
 data class Transformer(
     @PrimaryKey
-    var id: Int,
+    var id: String,
     var name: String,
     var team: String,
     var strength: Int,
@@ -19,5 +19,5 @@ data class Transformer(
     var firepower: Int,
     var skill: Int,
     @SerializedName("team_icon")
-    var teamIcon: String
+    var teamIcon: String?
 )

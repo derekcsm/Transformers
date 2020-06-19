@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.transformers_list.TransListActivity">
 
+    <include
+        layout="@layout/toolbar_button"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/toolbar"
         android:id="@+id/rv_transformers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,4 +19,13 @@
         android:paddingTop="@dimen/first_keyline_half"
         android:paddingBottom="@dimen/first_keyline" />
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/first_keyline"
+        android:src="@drawable/ic_add_24dp" />
+
+</RelativeLayout>

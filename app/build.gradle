@@ -62,6 +62,9 @@ dependencies {
     // images
     implementation 'com.facebook.fresco:fresco:2.2.0'
 
+    //base level UI
+    implementation 'com.google.android.material:material:1.1.0'
+
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"

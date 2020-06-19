@@ -12,6 +12,9 @@ interface TransformersDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTransformersList(pokemonList: List<Transformer>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertTransformer(transformer: Transformer)
+
     @Query("SELECT * FROM Transformer")
     fun getTransformersList(): List<Transformer>
 }

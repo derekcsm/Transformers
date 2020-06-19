@@ -7,38 +7,34 @@ import xyz.derekcsm.transformers.network.ApiService
 import xyz.derekcsm.transformers.persistence.TransformersDao
 import javax.inject.Inject
 
-class TransformersRepository @Inject constructor(
+class CreateEditTransformerRepository @Inject constructor(
     private val apiService: ApiService,
     private val transformersDao: TransformersDao
 ) : Repository {
 
-    private val TAG = "TransformersRepository"
+    private val TAG = "CreateEditRepository"
     override var isLoading: ObservableBoolean = ObservableBoolean(false)
 
-    fun fetchTransformersFromDB(): List<Transformer> {
-        return transformersDao.getTransformersList()
-    }
-
-    suspend fun fetchTransformersFromNetwork(): TransformersListRepositoryResponse {
-        val transformersList: List<Transformer>
-
-        when (val transformersResponse = apiService.getTransformers().await()) {
+    suspend fun createTransformer(transformer: Transformer): CreateTransformerRepositoryResponse {
+        when (val createTransformerResponse = apiService.createTransformer(transformer).await()) {
             is NetworkResponse.Success -> {
                 isLoading.set(false)
-                transformersList = transformersResponse.body.transformers
-                transformersDao.insertTransformersList(transformersList)
-                return TransformersListRepositoryResponse(transformersList, null)
+                transformersDao.insertTransformer(createTransformerResponse.body)
+                return CreateTransformerRepositoryResponse(createTransformerResponse.body, null)
             }
             is NetworkResponse.ServerError -> {
                 isLoading.set(false)
-                return TransformersListRepositoryResponse(
+                return CreateTransformerRepositoryResponse(
                     null,
-                    transformersResponse.body!!.message()
+                    createTransformerResponse.body!!.message()
                 )
             }
             is NetworkResponse.NetworkError -> {
                 isLoading.set(false)
-                return TransformersListRepositoryResponse(null, transformersResponse.toString())
+                return CreateTransformerRepositoryResponse(
+                    null,
+                    createTransformerResponse.toString()
+                )
             }
             else -> {
                 isLoading.set(false)
@@ -48,7 +44,7 @@ class TransformersRepository @Inject constructor(
     }
 }
 
-data class TransformersListRepositoryResponse(
-    var transformersList: List<Transformer>?,
+data class CreateTransformerRepositoryResponse(
+    var transformer: Transformer?,
     var errorMessage: String?
 )

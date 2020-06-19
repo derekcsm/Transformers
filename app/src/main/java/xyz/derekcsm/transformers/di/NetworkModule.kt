@@ -36,7 +36,7 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(@ApplicationContext context: Context, sharedPref: SharedPref): OkHttpClient {
         val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.HEADERS) // TODO for dev purposes only
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY) // TODO for dev purposes only
 
         return OkHttpClient.Builder()
             .addInterceptor(logging)
@@ -58,7 +58,6 @@ object NetworkModule {
             .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addConverterFactory(ScalarsConverterFactory.create())
             .build()
     }
 
