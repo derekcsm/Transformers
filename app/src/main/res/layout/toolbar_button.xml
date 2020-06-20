@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:navigationIcon="@drawable/ic_close_24dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbar_height"
     android:background="@color/primary">
 
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="@dimen/toolbar_height"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@drawable/selector_white"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_close_24dp" />
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/progress_horizontal"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/first_keyline_half"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:mpb_progressStyle="horizontal"
+        tools:visibility="visible" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_close"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -29,5 +47,4 @@
             tools:text="text" />
 
     </LinearLayout>
-
-</androidx.appcompat.widget.Toolbar>
+</RelativeLayout>

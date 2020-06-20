@@ -62,9 +62,10 @@ dependencies {
     // images
     implementation 'com.facebook.fresco:fresco:2.2.0'
 
-    //base level UI
+    //base level UI (AKA breaking the rules)
     implementation 'com.google.android.material:material:1.1.0'
     implementation "com.github.duanhong169:drawabletoolbox:1.0.7"
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
 
     // Dagger Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"

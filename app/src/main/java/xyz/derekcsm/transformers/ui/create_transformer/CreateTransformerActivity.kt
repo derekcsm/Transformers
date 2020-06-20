@@ -4,12 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.forEach
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_create_transformer.*
 import kotlinx.android.synthetic.main.toolbar_button.*
@@ -68,7 +72,7 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
             sb_skill.setProgress(transformerToEdit.skill - 1)
         }
 
-        toolbar.setNavigationOnClickListener {
+        iv_close.setOnClickListener {
             super.onBackPressed()
         }
         toolbar.elevation = 0f
@@ -159,8 +163,8 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
     private fun formatTransformerFromInputsAndCreate() {
 
         if (et_name.text.toString().isEmpty()) {
+            Toast.makeText(this, R.string.error_must_have_name, Toast.LENGTH_LONG).show()
             return
-            // todo show error
         }
 
         val transformer = Transformer(
@@ -187,5 +191,26 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
 
     override fun onRequestCompleted() {
         super.onBackPressed()
+    }
+
+    override fun showLoading() {
+        btn_toolbar.isEnabled = false
+        scrollview.deepForEach { isEnabled = false }
+        progress_horizontal.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        btn_toolbar.isEnabled = true
+        scrollview.deepForEach { isEnabled = true }
+        progress_horizontal.visibility = View.GONE
+    }
+
+    fun ViewGroup.deepForEach(function: View.() -> Unit) {
+        this.forEach { child ->
+            child.function()
+            if (child is ViewGroup) {
+                child.deepForEach(function)
+            }
+        }
     }
 }
