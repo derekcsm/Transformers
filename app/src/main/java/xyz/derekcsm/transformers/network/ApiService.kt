@@ -1,8 +1,6 @@
 package xyz.derekcsm.transformers.network
 
-import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.Deferred
-import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.http.*
 import xyz.derekcsm.transformers.model.Transformer
@@ -14,16 +12,14 @@ interface ApiService {
     fun getAuthentication(): Deferred<Response<String>>
 
     @GET("transformers")
-    fun getTransformers(): Deferred<NetworkResponse<TransformersResponse, HttpException>>
+    fun getTransformers(): Deferred<Response<TransformersResponse>>
 
     @POST("transformers")
-    fun createTransformer(@Body transformer: Transformer): Deferred<NetworkResponse<Transformer, HttpException>>
+    fun createTransformer(@Body transformer: Transformer): Deferred<Response<Transformer>>
 
     @PUT("transformers")
-    fun updateTransformer(
-        @Body transformer: Transformer
-    ): Deferred<NetworkResponse<Transformer, HttpException>>
+    fun updateTransformer(@Body transformer: Transformer): Deferred<Response<Transformer>>
 
     @DELETE("transformers/{transformerId}")
-    fun deleteTransformer(@Path("transformerId") id: String): Deferred<NetworkResponse<Response<String>, HttpException>>
+    fun deleteTransformer(@Path("transformerId") id: String): Deferred<Response<String>>
 }

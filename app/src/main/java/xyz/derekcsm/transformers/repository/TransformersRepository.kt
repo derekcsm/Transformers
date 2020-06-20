@@ -1,7 +1,6 @@
 package xyz.derekcsm.transformers.repository
 
 import androidx.databinding.ObservableBoolean
-import com.haroldadmin.cnradapter.NetworkResponse
 import xyz.derekcsm.transformers.model.Transformer
 import xyz.derekcsm.transformers.network.ApiService
 import xyz.derekcsm.transformers.persistence.TransformersDao
@@ -22,51 +21,28 @@ class TransformersRepository @Inject constructor(
     suspend fun fetchTransformersFromNetwork(): TransformersListRepositoryResponse {
         val transformersList: List<Transformer>
 
-        when (val transformersResponse = apiService.getTransformers().await()) {
-            is NetworkResponse.Success -> {
-                isLoading.set(false)
-                transformersList = transformersResponse.body.transformers
-                transformersDao.insertTransformersList(transformersList)
-                return TransformersListRepositoryResponse(transformersList, null)
-            }
-            is NetworkResponse.ServerError -> {
-                isLoading.set(false)
-                return TransformersListRepositoryResponse(
-                    null,
-                    transformersResponse.body!!.message()
-                )
-            }
-            is NetworkResponse.NetworkError -> {
-                isLoading.set(false)
-                return TransformersListRepositoryResponse(null, transformersResponse.toString())
-            }
-            else -> {
-                isLoading.set(false)
-                error("unknown")
-            }
+        val transformersResponse = apiService.getTransformers().await()
+        return if (transformersResponse.isSuccessful) {
+            isLoading.set(false)
+            transformersList = transformersResponse.body()!!.transformers
+            transformersDao.insertTransformersList(transformersList)
+            TransformersListRepositoryResponse(transformersList, null)
+        } else {
+            isLoading.set(false)
+            TransformersListRepositoryResponse(null, transformersResponse.message())
         }
     }
 
     suspend fun deleteTransformer(id: String): Boolean {
         transformersDao.deleteTransformer(id)
 
-        when (val deleteResponse = apiService.deleteTransformer(id).await()) {
-            is NetworkResponse.Success -> {
-                isLoading.set(false)
-                return true
-            }
-            is NetworkResponse.ServerError -> {
-                isLoading.set(false)
-                return false
-            }
-            is NetworkResponse.NetworkError -> {
-                isLoading.set(false)
-                return false
-            }
-            else -> {
-                isLoading.set(false)
-                error("unknown")
-            }
+        val deleteResponse = apiService.deleteTransformer(id).await()
+        return if (deleteResponse.isSuccessful) {
+            isLoading.set(false)
+            true
+        } else {
+            isLoading.set(false)
+            false
         }
     }
 }
