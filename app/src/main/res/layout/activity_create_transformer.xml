@@ -35,7 +35,7 @@
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:hint="@string/name"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapWords"
                     android:textSize="@dimen/display_1" />
 
             </LinearLayout>
