@@ -57,4 +57,8 @@ class TransListActivity : AppCompatActivity(),
         transListAdapter.removeTransformer(transformer.id)
         viewModel.deleteTransformer(transformer.id)
     }
+
+    override fun getItemCount(): Int {
+        return transListAdapter.itemCount
+    }
 }

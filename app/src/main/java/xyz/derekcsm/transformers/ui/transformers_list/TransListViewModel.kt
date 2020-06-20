@@ -28,9 +28,12 @@ class TransListViewModel @ViewModelInject constructor(
     }
 
     fun fetchTransformers() {
-        //populate from DB first every time
-        val localTransformers = transformersRepository.fetchTransformersFromDB()
-        view!!.populateList(localTransformers)
+        if (view!!.getItemCount() == 0) {
+            //populate from DB first when adapter is completely empty
+            // (fresh activity creation)
+            val localTransformers = transformersRepository.fetchTransformersFromDB()
+            view!!.populateList(localTransformers)
+        }
 
         uiScope.launch {
             val response = transformersRepository.fetchTransformersFromNetwork()
