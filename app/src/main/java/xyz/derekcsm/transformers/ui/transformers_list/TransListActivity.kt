@@ -10,7 +10,6 @@ import androidx.lifecycle.OnLifecycleEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_trans_list.*
-import kotlinx.android.synthetic.main.toolbar_button.*
 import xyz.derekcsm.transformers.R
 import xyz.derekcsm.transformers.model.Transformer
 import xyz.derekcsm.transformers.ui.create_transformer.CreateTransformerActivity
@@ -38,11 +37,6 @@ class TransListActivity : AppCompatActivity(),
 
         fab.setOnClickListener {
             startActivity(CreateTransformerActivity.activityIntent(this, null))
-        }
-
-        btn_toolbar.text = getString(R.string.fight)
-        btn_toolbar.setOnClickListener {
-            // todo
         }
     }
 

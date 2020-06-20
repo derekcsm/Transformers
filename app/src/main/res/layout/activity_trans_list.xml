@@ -7,7 +7,12 @@
     android:orientation="vertical"
     tools:context=".ui.transformers_list.TransListActivity">
 
-    <include layout="@layout/toolbar_button" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/primary"
+        app:title="@string/app_name" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_transformers"

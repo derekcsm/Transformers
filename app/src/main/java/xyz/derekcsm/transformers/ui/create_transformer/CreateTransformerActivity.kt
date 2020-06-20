@@ -52,6 +52,9 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
         }
 
         if (transformerId != "") {
+            /*
+            Populate fields from existing Transformer for updating
+             */
             val transformerToEdit = viewModel.getTransformerFromDB(transformerId)
             selectTeam(transformerToEdit.team)
             et_name.setText(transformerToEdit.name)
@@ -65,8 +68,11 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
             sb_skill.setProgress(transformerToEdit.skill - 1)
         }
 
+        toolbar.setNavigationOnClickListener {
+            super.onBackPressed()
+        }
         toolbar.elevation = 0f
-        btn_toolbar.text = getString(R.string.create)
+        btn_toolbar.text = getString(R.string.save)
         btn_toolbar.setOnClickListener {
             formatTransformerFromInputsAndCreate()
         }

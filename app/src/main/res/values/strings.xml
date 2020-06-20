@@ -17,7 +17,7 @@
 
   <string name="stat">%1$s: %2$s</string>
   <string name="fight">Fight!</string>
-  <string name="create">Create</string>
+  <string name="save">Save</string>
   <string name="delete">Delete</string>
 
 </resources>
