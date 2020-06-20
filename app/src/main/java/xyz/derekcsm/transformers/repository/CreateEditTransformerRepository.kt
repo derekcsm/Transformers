@@ -19,23 +19,23 @@ class CreateEditTransformerRepository @Inject constructor(
         return transformersDao.getTransformer(id)
     }
 
-    suspend fun createTransformer(transformer: Transformer): CreateTransformerRepositoryResponse {
+    suspend fun createTransformer(transformer: Transformer): CreateUpdateTransformerRepositoryResponse {
         when (val createTransformerResponse = apiService.createTransformer(transformer).await()) {
             is NetworkResponse.Success -> {
                 isLoading.set(false)
                 transformersDao.insertTransformer(createTransformerResponse.body)
-                return CreateTransformerRepositoryResponse(createTransformerResponse.body, null)
+                return CreateUpdateTransformerRepositoryResponse(createTransformerResponse.body, null)
             }
             is NetworkResponse.ServerError -> {
                 isLoading.set(false)
-                return CreateTransformerRepositoryResponse(
+                return CreateUpdateTransformerRepositoryResponse(
                     null,
                     createTransformerResponse.body!!.message()
                 )
             }
             is NetworkResponse.NetworkError -> {
                 isLoading.set(false)
-                return CreateTransformerRepositoryResponse(
+                return CreateUpdateTransformerRepositoryResponse(
                     null,
                     createTransformerResponse.toString()
                 )
@@ -46,9 +46,37 @@ class CreateEditTransformerRepository @Inject constructor(
             }
         }
     }
+
+    suspend fun updateTransformer(transformer: Transformer): CreateUpdateTransformerRepositoryResponse {
+        when (val updateTransformerResponse = apiService.updateTransformer(transformer).await()) {
+            is NetworkResponse.Success -> {
+                isLoading.set(false)
+                transformersDao.insertTransformer(updateTransformerResponse.body)
+                return CreateUpdateTransformerRepositoryResponse(updateTransformerResponse.body, null)
+            }
+            is NetworkResponse.ServerError -> {
+                isLoading.set(false)
+                return CreateUpdateTransformerRepositoryResponse(
+                    null,
+                    updateTransformerResponse.body!!.message()
+                )
+            }
+            is NetworkResponse.NetworkError -> {
+                isLoading.set(false)
+                return CreateUpdateTransformerRepositoryResponse(
+                    null,
+                    updateTransformerResponse.toString()
+                )
+            }
+            else -> {
+                isLoading.set(false)
+                error("unknown")
+            }
+        }
+    }
 }
 
-data class CreateTransformerRepositoryResponse(
+data class CreateUpdateTransformerRepositoryResponse(
     var transformer: Transformer?,
     var errorMessage: String?
 )

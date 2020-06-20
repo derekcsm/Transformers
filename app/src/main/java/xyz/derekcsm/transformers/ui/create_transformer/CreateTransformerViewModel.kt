@@ -26,7 +26,7 @@ class CreateTransformerViewModel @ViewModelInject constructor(
         return createEditRepository.getTransformerFromDB(transformerId)
     }
 
-    fun postCreateTransformer(transformer: Transformer) {
+    fun createTransformer(transformer: Transformer) {
         uiScope.launch {
             val transformerResponse = createEditRepository.createTransformer(transformer)
             Log.d(TAG, "postCreateTransformer() called" + transformerResponse)
@@ -36,7 +36,13 @@ class CreateTransformerViewModel @ViewModelInject constructor(
         }
     }
 
-    fun putUpdateTransformer() {
-
+    fun updateTransformer(transformer: Transformer) {
+        uiScope.launch {
+            val transformerResponse = createEditRepository.updateTransformer(transformer)
+            Log.d(TAG, "postCreateTransformer() called" + transformerResponse)
+            if (transformerResponse.transformer != null) {
+                view!!.onRequestCompleted()
+            }
+        }
     }
 }

@@ -18,7 +18,6 @@ import xyz.derekcsm.transformers.R
 import xyz.derekcsm.transformers.base.Constants
 import xyz.derekcsm.transformers.model.Transformer
 
-
 @AndroidEntryPoint
 class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
 
@@ -174,9 +173,9 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
         )
 
         if (transformerId != "") {
-            // todo edit
+            viewModel.updateTransformer(transformer)
         } else {
-            viewModel.postCreateTransformer(transformer)
+            viewModel.createTransformer(transformer)
         }
     }
 

@@ -19,6 +19,11 @@ interface ApiService {
     @POST("transformers")
     fun createTransformer(@Body transformer: Transformer): Deferred<NetworkResponse<Transformer, HttpException>>
 
+    @PUT("transformers")
+    fun updateTransformer(
+        @Body transformer: Transformer
+    ): Deferred<NetworkResponse<Transformer, HttpException>>
+
     @DELETE("transformers/{transformerId}")
     fun deleteTransformer(@Path("transformerId") id: String): Deferred<NetworkResponse<Response<String>, HttpException>>
 }
