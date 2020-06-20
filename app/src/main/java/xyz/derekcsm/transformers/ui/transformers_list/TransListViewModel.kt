@@ -31,6 +31,7 @@ class TransListViewModel @ViewModelInject constructor(
         if (view!!.getItemCount() == 0) {
             //populate from DB first when adapter is completely empty
             // (fresh activity creation)
+            view!!.showLoading()
             val localTransformers = transformersRepository.fetchTransformersFromDB()
             view!!.populateList(localTransformers)
         }
@@ -39,8 +40,10 @@ class TransListViewModel @ViewModelInject constructor(
             val response = transformersRepository.fetchTransformersFromNetwork()
             if (response.transformersList != null) {
                 view!!.populateList(response.transformersList!!)
+                view!!.hideLoading()
             } else {
                 // handle error
+                view!!.hideLoading()
             }
         }
     }

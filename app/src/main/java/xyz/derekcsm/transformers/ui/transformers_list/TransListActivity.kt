@@ -30,9 +30,15 @@ class TransListActivity : AppCompatActivity(),
         viewModel.connectViewInterface(this)
         setContentView(R.layout.activity_trans_list)
         lifecycle.addObserver(this)
+
         rv_transformers.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = transListAdapter
+        }
+
+        swipe_refresh_layout.setOnRefreshListener {
+            showLoading()
+            reload()
         }
 
         fab.setOnClickListener {
@@ -60,5 +66,13 @@ class TransListActivity : AppCompatActivity(),
 
     override fun getItemCount(): Int {
         return transListAdapter.itemCount
+    }
+
+    override fun showLoading() {
+        swipe_refresh_layout.isRefreshing = true
+    }
+
+    override fun hideLoading() {
+        swipe_refresh_layout.isRefreshing = false
     }
 }

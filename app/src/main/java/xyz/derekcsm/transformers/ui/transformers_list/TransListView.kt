@@ -5,4 +5,6 @@ import xyz.derekcsm.transformers.model.Transformer
 interface TransListView {
     fun populateList(transformersList: List<Transformer>)
     fun getItemCount(): Int
+    fun showLoading()
+    fun hideLoading()
 }
