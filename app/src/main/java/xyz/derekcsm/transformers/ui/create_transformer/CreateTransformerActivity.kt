@@ -61,7 +61,7 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
              */
             val transformerToEdit = viewModel.getTransformerFromDB(transformerId)
             selectTeam(transformerToEdit.team)
-            et_name.setText(transformerToEdit.name)
+            et_transformer_name.setText(transformerToEdit.name)
             sb_strength.setProgress(transformerToEdit.strength - 1)
             sb_intelligence.setProgress(transformerToEdit.intelligence - 1)
             sb_speed.setProgress(transformerToEdit.speed - 1)
@@ -162,14 +162,14 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
 
     private fun formatTransformerFromInputsAndCreate() {
 
-        if (et_name.text.toString().isEmpty()) {
+        if (et_transformer_name.text.toString().isEmpty()) {
             Toast.makeText(this, R.string.error_must_have_name, Toast.LENGTH_LONG).show()
             return
         }
 
         val transformer = Transformer(
             transformerId,
-            et_name.text.toString(),
+            et_transformer_name.text.toString(),
             selectedTeam,
             sb_strength.progress + 1,
             sb_intelligence.progress + 1,
