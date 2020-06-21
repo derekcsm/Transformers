@@ -24,7 +24,8 @@
             android:id="@+id/sdv_team_icon"
             android:layout_width="@dimen/team_icon_size"
             android:layout_height="@dimen/team_icon_size"
-            tools:background="@color/white" />
+            app:failureImage="@drawable/transformers_team_placeholder"
+            app:placeholderImage="@drawable/transformers_team_placeholder"/>
 
         <LinearLayout
             android:layout_width="match_parent"

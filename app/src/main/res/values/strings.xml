@@ -21,4 +21,10 @@
   <string name="delete">Delete</string>
 
   <string name="error_must_have_name">Your Transformer needs a name!</string>
+
+  <string name="transformers_zero_state">You haven\'t created any Transformers yet</string>
+  <string name="network_error">Network error</string>
+  <string name="no_internet_connection">No internet connection</string>
+  <string name="error_unknown">Error unknown</string>
+  <string name="error_timeout">Error timeout</string>
 </resources>

@@ -12,14 +12,14 @@ interface ApiService {
     fun getAuthentication(): Deferred<Response<String>>
 
     @GET("transformers")
-    fun getTransformers(): Deferred<Response<TransformersResponse>>
+    suspend fun getTransformers(): TransformersResponse
 
     @POST("transformers")
-    fun createTransformer(@Body transformer: Transformer): Deferred<Response<Transformer>>
+    suspend fun createTransformer(@Body transformer: Transformer): Transformer
 
     @PUT("transformers")
-    fun updateTransformer(@Body transformer: Transformer): Deferred<Response<Transformer>>
+    suspend fun updateTransformer(@Body transformer: Transformer): Transformer
 
     @DELETE("transformers/{transformerId}")
-    fun deleteTransformer(@Path("transformerId") id: String): Deferred<Response<String>>
+    suspend fun deleteTransformer(@Path("transformerId") id: String): String
 }

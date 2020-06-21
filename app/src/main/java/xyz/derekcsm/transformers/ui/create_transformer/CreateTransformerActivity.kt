@@ -213,4 +213,8 @@ class CreateTransformerActivity : AppCompatActivity(), CreateTransformerView {
             }
         }
     }
+
+    override fun getContext(): Context {
+        return this
+    }
 }

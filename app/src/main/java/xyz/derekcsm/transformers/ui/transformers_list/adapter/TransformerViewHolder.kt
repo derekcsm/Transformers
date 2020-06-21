@@ -1,27 +1,36 @@
 package xyz.derekcsm.transformers.ui.transformers_list.adapter
 
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.drawee.view.SimpleDraweeView
 import kotlinx.android.synthetic.main.item_transformer.view.*
 import kotlinx.android.synthetic.main.layout_item_stats.view.*
 import xyz.derekcsm.transformers.R
 import xyz.derekcsm.transformers.model.Transformer
+import xyz.derekcsm.transformers.utils.ConnectivityUtils
 
 class TransformerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val context = itemView.context
+    lateinit var sdvTeamIcon: SimpleDraweeView
 
     fun bindView(listener: TransListAdapterListener, transformer: Transformer) {
         itemView.card_transformer.setOnClickListener {
             listener.onTransformerClicked(transformer)
         }
         itemView.tv_delete.setOnClickListener {
-            listener.onDeleteTransformerClicked(transformer)
+            if (ConnectivityUtils().isInternetAvailable(context)) {
+                listener.onDeleteTransformerClicked(transformer)
+            } else {
+                Toast.makeText(context, R.string.no_internet_connection, Toast.LENGTH_SHORT).show()
+            }
         }
 
-        itemView.tv_name.text = transformer.name
-        itemView.sdv_team_icon.setImageURI(transformer.teamIcon)
+        sdvTeamIcon = itemView.findViewById(R.id.sdv_team_icon)
+        sdvTeamIcon.setImageURI(transformer.teamIcon)
 
+        itemView.tv_name.text = transformer.name
         itemView.tv_courage.text = context.getString(
             R.string.stat,
             context.getString(R.string.courage),
@@ -62,7 +71,5 @@ class TransformerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
             context.getString(R.string.strength),
             transformer.strength.toString()
         )
-
     }
-
 }

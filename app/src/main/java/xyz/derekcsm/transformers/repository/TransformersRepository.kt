@@ -1,7 +1,7 @@
 package xyz.derekcsm.transformers.repository
 
-import androidx.databinding.ObservableBoolean
 import xyz.derekcsm.transformers.model.Transformer
+import xyz.derekcsm.transformers.model.TransformersResponse
 import xyz.derekcsm.transformers.network.ApiService
 import xyz.derekcsm.transformers.persistence.TransformersDao
 import javax.inject.Inject
@@ -9,45 +9,34 @@ import javax.inject.Inject
 class TransformersRepository @Inject constructor(
     private val apiService: ApiService,
     private val transformersDao: TransformersDao
-) : Repository {
+) : Repository() {
 
     private val TAG = "TransformersRepository"
-    override var isLoading: ObservableBoolean = ObservableBoolean(false)
 
     fun fetchTransformersFromDB(): List<Transformer> {
         return transformersDao.getTransformersList()
     }
 
-    suspend fun fetchTransformersFromNetwork(): TransformersListRepositoryResponse {
-        val transformersList: List<Transformer>
+    suspend fun fetchTransformersFromNetwork(errorEmitter: RemoteErrorEmitter): List<Transformer>? {
+        var transformersList: List<Transformer> = listOf()
 
-        val transformersResponse = apiService.getTransformers().await()
-        return if (transformersResponse.isSuccessful) {
-            isLoading.set(false)
-            transformersList = transformersResponse.body()!!.transformers
-            transformersDao.insertTransformersList(transformersList)
-            TransformersListRepositoryResponse(transformersList, null)
-        } else {
-            isLoading.set(false)
-            TransformersListRepositoryResponse(null, transformersResponse.message())
+        val transformersListResponse: TransformersResponse? = safeApiCall(errorEmitter) {
+            apiService.getTransformers()
         }
+
+        if (transformersListResponse != null) {
+            transformersList = transformersListResponse.transformers
+            transformersDao.insertTransformersList(transformersList)
+            return transformersList
+        }
+
+        return null
     }
 
-    suspend fun deleteTransformer(id: String): Boolean {
+    suspend fun deleteTransformer(errorEmitter: RemoteErrorEmitter, id: String) {
         transformersDao.deleteTransformer(id)
-
-        val deleteResponse = apiService.deleteTransformer(id).await()
-        return if (deleteResponse.isSuccessful) {
-            isLoading.set(false)
-            true
-        } else {
-            isLoading.set(false)
-            false
+        safeApiCall(errorEmitter) {
+            apiService.deleteTransformer(id)
         }
     }
 }
-
-data class TransformersListRepositoryResponse(
-    var transformersList: List<Transformer>?,
-    var errorMessage: String?
-)
