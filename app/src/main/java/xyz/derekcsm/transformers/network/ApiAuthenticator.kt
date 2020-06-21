@@ -51,8 +51,12 @@ class ApiAuthenticator(val context: Context, val sharedPref: SharedPref) : Authe
         retryCount: Int
     ): Request? {
         val authToken = renewToken().body()
-        sharedPref.write(Constants.SHARED_PREF_TOKEN, authToken.toString())
-        return rewriteRequest(staleRequest, retryCount, authToken.toString())
+        if (authToken != null) {
+            sharedPref.write(Constants.SHARED_PREF_TOKEN, authToken.toString())
+            return rewriteRequest(staleRequest, retryCount, authToken.toString())
+        } else {
+            return rewriteRequest(staleRequest, retryCount,"")
+        }
     }
 
     private fun renewToken() = runBlocking {
