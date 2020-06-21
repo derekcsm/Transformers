@@ -23,7 +23,7 @@ class CreateEditTransformerRepository @Inject constructor(
             apiService.createTransformer(transformer)
         }
 
-        transformerResponse?.let { transformersDao.insertTransformer(it) }
+        transformerResponse?.let { transformersDao.upsert(it) }
         return transformerResponse
     }
 
@@ -33,7 +33,7 @@ class CreateEditTransformerRepository @Inject constructor(
             apiService.updateTransformer(transformer)
         }
 
-        transformerResponse?.let { transformersDao.insertTransformer(it) }
+        transformerResponse?.let { transformersDao.upsert(it) }
         return transformerResponse
     }
 }
