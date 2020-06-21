@@ -32,4 +32,8 @@ class CreateTransformerTest : CreateFlowTestRobot() {
         saveTransformer()
         checkTransformerNameInRecyclerView(0, transformerName)
     }
+
+    /*
+    Could easily compose more actions here based on this pattern, just keeping it short and simple
+     */
 }

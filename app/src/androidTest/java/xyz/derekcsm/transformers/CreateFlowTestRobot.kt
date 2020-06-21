@@ -33,7 +33,6 @@ open class CreateFlowTestRobot : BaseTestRobot() {
     }
 
     fun checkTransformerNameInRecyclerView(index: Int, name: String) {
-
         onView(withId(R.id.rv_transformers))
             .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(index))
             .check(
