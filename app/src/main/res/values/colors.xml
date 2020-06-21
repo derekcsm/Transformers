@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#6200EE</color>
-  <color name="colorPrimaryDark">#3700B3</color>
-  <color name="colorAccent">#03DAC5</color>
+  <color name="primary">#6200EE</color>
+  <color name="primary_dark">#3700B3</color>
+  <color name="accent">@color/white</color>
+  <color name="accent_colored">#03A9F4</color>
+
+  <color name="white">#fff</color>
+  <color name="black">#000</color>
+  <color name="black_translucent">#80000000</color>
+  <color name="red">#F6707B</color>
+
+  <!-- selectors -->
+  <color name="white_selector">#27ffffff</color>
+
+  <color name="decepticon">#4C47AE</color>
+  <color name="autobot">#DE0012</color>
+
 </resources>

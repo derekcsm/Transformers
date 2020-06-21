@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- keylines -->
+    <dimen name="first_keyline">16dp</dimen>
+    <dimen name="first_keyline_half">8dp</dimen>
+    <dimen name="first_keyline_quarter">4dp</dimen>
+    <dimen name="second_keyline">72dp</dimen>
+    <dimen name="second_keyline_half">36dp</dimen>
+    <dimen name="dialog_padding">24dp</dimen>
+
+    <!-- typography -->
+    <dimen name="display_4">112sp</dimen>
+    <dimen name="display_3">56sp</dimen>
+    <dimen name="display_2">45sp</dimen>
+    <dimen name="display_1">34sp</dimen>
+    <dimen name="display_0">30sp</dimen>
+    <dimen name="headline">24sp</dimen>
+    <dimen name="title">20sp</dimen>
+    <dimen name="subhead">16sp</dimen>
+    <dimen name="body">14sp</dimen>
+    <dimen name="caption">12sp</dimen>
+
+    <!-- buttons -->
+    <dimen name="button_height">36dp</dimen>
+    <dimen name="button_rounded_radius">24dp</dimen>
+
+
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="seekbar_height">52dp</dimen>
+    <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="team_picker_height">60dp</dimen>
+    <dimen name="team_icon_size">42dp</dimen>
+    <dimen name="stat_padding_bottom">4dp</dimen>
+
+</resources>
