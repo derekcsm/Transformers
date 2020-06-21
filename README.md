@@ -1,6 +1,5 @@
 # Transformers
 ## A Demo project by @derekcsm
-----
 
 Hey there review team! Please consider this project a reasonable approximation of my skills following a mix of new patterns and some old-school K.I.S.S. methodology. 
 
